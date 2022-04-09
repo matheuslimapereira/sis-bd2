@@ -15,24 +15,24 @@
     <div class="content">
         <h1>Bibliófilo's</h1>
 
-        <h2>Livros</h2>
+        <h2>autor</h2>
         <?php
         require 'mysql_server.php';
 
         $conexao = RetornaConexao();
 
-        $titulo = 'titulo';
-        $autor = 'autor';
-        $classificacao = 'classificacao';
+        $nome = 'nome';
+        $nascimento = 'nascimento';
+        $livro = 'livro';
         /*TODO-1: Adicione uma variavel para cada coluna */
 
 
         $sql =
-            'SELECT ' . $titulo .
-            '     , ' . $autor .
-            '     , ' . $classificacao .
+            'SELECT ' . $nome .
+            '     , ' . $nascimento .
+            '     , ' . $livro .
             /*TODO-2: Adicione cada variavel a consulta abaixo */
-            '  FROM livros';
+            '  FROM autor';
 
 
         $resultado = mysqli_query($conexao, $sql);
@@ -45,10 +45,10 @@
         $cabecalho =
             '<table>' .
             '    <tr>' .
-            '        <th>' . $titulo . '</th>' .
-            '        <th>' . $autor . '</th>' .
+            '        <th>' . $nome . '</th>' .
+            '        <th>' . $nascimento . '</th>' .
             /* TODO-3: Adicione as variaveis ao cabeçalho da tabela */
-            '        <th>' . $classificacao . '</th>' .
+            '        <th>' . $livro . '</th>' .
             '    </tr>';
 
         echo $cabecalho;
@@ -58,10 +58,10 @@
             while ($registro = mysqli_fetch_assoc($resultado)) {
                 echo '<tr>';
 
-                echo '<td>' . $registro[$titulo] . '</td>' .
-                    '<td>' . $registro[$autor] . '</td>' .
+                echo '<td>' . $registro[$nome] . '</td>' .
+                    '<td>' . $registro[$nascimento] . '</td>' .
                     /* TODO-4: Adicione a tabela os novos registros. */
-                    '<td>' . $registro[$classificacao] . '</td>';
+                    '<td>' . $registro[$livro] . '</td>';
                 echo '</tr>';
             }
             echo '</table>';
