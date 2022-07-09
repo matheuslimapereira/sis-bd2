@@ -133,7 +133,7 @@ DROP FUNCTION RETORNA_LIVROS_ID;
 SELECT RETORNA_LIVROS_ID(1);
 
 
-#Criando uma trigger - OBS: Criei novas tabelas pois não consegui achar funcionalidade nas tabelas do projeto original
+#Criando uma trigger
 
 CREATE TABLE Produtos
 (
@@ -155,12 +155,12 @@ CREATE TABLE ItensVenda
 
 DELIMITER $
 
-CREATE TRIGGER Tgr_Livros_Insert AFTER INSERT
+CREATE TRIGGER Tgr_ItensVenda_Insert AFTER INSERT
 ON ItensVenda
 FOR EACH ROW
 BEGIN
-	UPDATE livros SET Estoque = Estoque - NEW.Quantidade
-WHERE nome_livro = NEW.livros;
+	UPDATE Produtos SET Estoque = Estoque - NEW.Quantidade
+WHERE Referencia = NEW.Produto;
 END$
 
 CREATE TRIGGER Tgr_ItensVenda_Delete AFTER DELETE
@@ -180,10 +180,10 @@ SET GLOBAL event_scheduler = ON;
 CREATE EVENT id_livros_event
     ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 10 SECOND
     DO
-      UPDATE euk_event SET status=2 WHERE livro_id=1;     
+      UPDATE euk_event SET status=2 WHERE livro_id=1;  
       
 
-#CRIANDO UM PROCEDURE - Sem usabilidade no projeto :(
+#CRIANDO UM PROCEDURE
    
 DELIMITER //                           
 
